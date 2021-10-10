@@ -12,4 +12,8 @@ class Charge extends Model
 
     protected $fillable = ['name','value','is_percent','is_visible'];
 
+    protected $cast = [
+        'value' => 'float'
+    ];
+
 }

@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+
 Route::group(['middleware' => ['auth']], function () {
+
     foreach (scandir($path = app_path('Web')) as $dirName) {
         if (file_exists($filepath = $path.'/'.$dirName.'/routes.php')) {
             include $filepath;

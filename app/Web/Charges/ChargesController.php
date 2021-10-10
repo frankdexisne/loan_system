@@ -21,7 +21,19 @@ class ChargesController extends BaseCrudController
                 ]
             ];
 
-        $this->modelQuery = $model;
+        if (request('loan_id')) {
+
+        }
+
+        $select = request('loan_id') ? ['charges.*', 'loan_charges.amount', 'loan_charges.id AS loan_charge_id'] : ['charges.*'];
+
+        $this->modelQuery = $model->when(request('loan_id'), function ($query) {
+            $query->leftJoin('dbloans.loan_charges', function ($query) {
+                $query->on('loan_charges.charge_id', '=', 'charges.id')
+                    ->where('loan_id', request('loan_id'));
+            });
+        })
+        ->select($select);
 
         View::share([
             'module' => $this->module

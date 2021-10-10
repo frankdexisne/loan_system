@@ -16,9 +16,6 @@ class ExpensesController extends BaseCrudController
         $this->model = $model;
 
         $this->rules = [
-                'name' => [
-                    'required'
-                ],
                 'expense_type_id' => [
                     'required',
                     'exists:mysql.expense_types,id'
@@ -36,7 +33,7 @@ class ExpensesController extends BaseCrudController
                 ]
             ];
 
-        $this->modelQuery = $model;
+        $this->modelQuery = $model->with(['employee','expense_type']);
 
         View::share([
             'module' => $this->module,

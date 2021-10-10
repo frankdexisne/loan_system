@@ -7,12 +7,12 @@ return [
         'url'=>'#',
         'icon'=>'menu-icon fa fa-credit-card',
         'sub_menu'=>[
-            // [
-            //     'name'=>'Search Client',
-            //     'route_name'=>'loans.create',
-            //     'icon'=>'menu-icon fa fa-plus',
-            //     'permission_name'=>'loans.create',
-            // ],
+            [
+                'name'=>'Search Client',
+                'route_name'=>'clients.index',
+                'icon'=>'menu-icon fa fa-users',
+                'permission_name'=>'loans.index',
+            ],
             [
                 'name'=>'Loans',
                 'route_name'=>'loans.index',
@@ -46,13 +46,13 @@ return [
         ],
         'permissions_name'=>'clients.index|loans.index',
     ],
-    // [
-    //     'name'=>'Payments & Remits',
-    //     'route_name'=>'remittances.index',
-    //     'icon'=>'menu-icon fa fa-money',
-    //     'sub_menu'=>[],
-    //     'permissions_name'=>'remittances.index',
-    // ],
+    [
+        'name'=>'Payments & Remits',
+        'route_name'=>'payments.index',
+        'icon'=>'menu-icon fa fa-money',
+        'sub_menu'=>[],
+        'permissions_name'=>'payments.index',
+    ],
     [
         'name'=>'Expenses',
         'route_name'=>'expenses.index',
@@ -126,12 +126,12 @@ return [
         'url'=>'#',
         'icon'=>'menu-icon fa  fa-list',
         'sub_menu'=>[
-            // [
-            //     'name'=>'Branches',
-            //     'route_name'=>'branches.index',
-            //     'icon'=>'menu-icon fa fa-file',
-            //     'permission_name'=>'branches.index',
-            // ],
+            [
+                'name'=>'Branches',
+                'route_name'=>'branches.index',
+                'icon'=>'menu-icon fa fa-file',
+                'permission_name'=>'branches.index',
+            ],
             [
                 'name'=>'Areas',
                 'route_name'=>'areas.index',

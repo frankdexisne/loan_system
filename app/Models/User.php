@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function employee(){
-        return $this->hasOne(DBPayroll\Employee::class);
+        return $this->hasOnebel(DBPayroll\Employee::class);
     }
 }

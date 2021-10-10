@@ -77,11 +77,11 @@
             type: "GET"
         },
         _columns = [
-            {data : 'name', title : 'Name'},
-            {data : 'value', title : 'Value'},
-            {data : 'is_percent', title : '%', render(data){
-                return data==1 ? '<i class="fa fa-check green"></i>' : '<i class="fa fa-times red"></i>';
+            {data : 'employee', title : 'Name', render(data){
+                return data['full_name'];
             }},
+            {data : 'amount', title : 'Amount'},
+            {data: 'description', title: 'Description'},
             {data : null, title : 'Action', render(data,type){
                 return '<div class="action-buttons">'+
 							'<a class="green edit" href="#">'+

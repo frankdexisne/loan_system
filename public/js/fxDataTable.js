@@ -4,17 +4,19 @@ function initDTable(
     _columns,
     _baseURL,
     _module,
-    _style = ''
+    _style = null,
+    _columnDefs = [],
+    _search = true
 ){
     if($.fn.DataTable.isDataTable( $el )){
         $($el).DataTable().destroy();
     }
     var datatable = $($el).DataTable({
         ajax : _ajax,
+        bFilter: _search,
+        columnDefs: _columnDefs,
         columns: _columns,
-        select: {
-            style: _style
-        }
+        select: _style
     })
     .off('click','.edit')
     .on('click','.edit',function(){

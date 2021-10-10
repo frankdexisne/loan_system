@@ -24,6 +24,10 @@ class CoMaker extends Model
         'monthly_salary'
     ];
 
+    protected $cast = [
+        'dob' => 'date'
+    ];
+
     public function co_maker_address(){
         return $this->hasMany(CoMakerAddress::class);
     }

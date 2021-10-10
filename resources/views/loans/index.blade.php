@@ -41,7 +41,7 @@
             <div class="pull-right tableTools-container">
                 <div class="dt-buttons btn-overlap btn-group">
                     <a
-                        id="add"
+                        href="{{route('loans.create')}}"
                         class="dt-button btn btn-white btn-primary btn-bold"
                         title="Add"
                         >
@@ -65,6 +65,22 @@
             List of {{ucfirst($module)}}
         </div>
         <div>
+            <form id="search">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="ace-icon fa fa-check"></i>
+                    </span>
+
+                    <input type="text" class="form-control search-query" name="name" placeholder="Type your query">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-inverse btn-white">
+                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                            Search
+                        </button>
+                    </span>
+                </div>
+            </form>
+
             <table id="datatable" class="table table-striped table-bordered table-hover" style="width:100%">
             </table>
         </div>
@@ -117,6 +133,14 @@
             }},
         ];
 
+        _style = {
+            style: 'multi'
+        }
+        _columnDefs = [
+            {width: '30%', targets : [1]}
+        ]
+
+
         $('#add').click(function(){
             $('#form').find('#id').removeAttr('value');
             $('#form').trigger('reset');
@@ -166,10 +190,30 @@
                 data: {
                     status : 'FOR APPROVAL',
                     payment_mode_id : $('#payment_mode_id').val(),
+                    name: $('#search').find('input[name="name"]').val()
                 }
             };
-            datatable = initDTable(_element, _ajax, _columns, "{{url('/')}}" , "{{$module}}");
+
+
+            datatable = initDTable(_element, _ajax, _columns, "{{url('/')}}" , "{{$module}}", _style, _columnDefs);
         })
+
+        $('#search').on('submit', function (e) {
+            e.preventDefault();
+            _ajax = {
+                url: "{{url($module.'/json-data')}}",
+                type: "GET",
+                data: {
+                    status : 'FOR APPROVAL',
+                    payment_mode_id : $('#payment_mode_id').val(),
+                    name: $(this).find('input[name="name"]').val()
+                }
+            };
+            datatable = initDTable(_element, _ajax, _columns, "{{url('/')}}" , "{{$module}}", _style, _columnDefs);
+        })
+
+
+
 
         $('#modal-form .submit-form').on('click',function(){
             _ajax = {

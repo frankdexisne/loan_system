@@ -19,6 +19,7 @@ class Loan extends Model
         'status_id',
         'transaction_code',
         'date_loan',
+        'included_at',
         'date_release',
         'transaction_id',
         'to_release_at',
@@ -26,6 +27,7 @@ class Loan extends Model
         'maturity_date',
         'last_payment_date',
         'loan_amount',
+        'loan_amount_with_interest',
         'interest',
         'settled',
         'balance',
@@ -45,7 +47,19 @@ class Loan extends Model
         'deduction_formatted',
         'ps_formatted',
         'cbu_formatted',
-        'total_byout_formatted'
+        'total_byout_formatted',
+        'category_name',
+        'term_name',
+        'payment_mode_name',
+        'payment_duration'
+    ];
+
+    protected $cast = [
+        'date_loan' => 'date',
+        'date_release' => 'date',
+        'first_payment' => 'date',
+        'maturity_date' => 'date',
+        'last_payment_date' => 'date'
     ];
 
     public function client(){
@@ -138,6 +152,26 @@ class Loan extends Model
 
     public function getBalanceFormattedAttribute(){
         return number_format($this->balance,2,'.',',');
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->category->name;
+    }
+
+    public function getTermNameAttribute()
+    {
+        return $this->term->name;
+    }
+
+    public function getPaymentModeNameAttribute()
+    {
+        return $this->payment_mode->name;
+    }
+
+    public function getPaymentDurationAttribute()
+    {
+        return date('m/d/Y', strtotime($this->first_payment)) . ' - ' . date('m/d/Y', strtotime($this->maturity_date));
     }
 
     public function scopeStatus($query, $statusName){

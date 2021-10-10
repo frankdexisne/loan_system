@@ -23,6 +23,8 @@
 		<!-- ace styles -->
 		<link rel="stylesheet" href="{{asset('ace-master')}}/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
+        <link rel="stylesheet" href="{{asset('ace-master')}}/css/select2.min.css" />
+
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
@@ -165,7 +167,7 @@
                                 <b class="arrow"></b>
 
                                 @if($menu['sub_menu'])
-                                
+
                                 <ul class="submenu">
                                     @foreach($menu['sub_menu'] as $submenu)
                                         @can($submenu['permission_name'])
@@ -274,11 +276,14 @@
         <script src="{{asset('/ace-master')}}/js/dataTables.rowGroup.min.js"></script>
         <script src="{{asset('/ace-master')}}/js/jquery.validate.min.js"></script>
         <script src="{{asset('/ace-master')}}/js/jquery.gritter.min.js"></script>
+		<script src="{{asset('/ace-master')}}/js/select2.min.js"></script>
         <script src="{{asset('/js/sweetalert2.js')}}"></script>
         <!-- inline scripts related to this page -->
 
         <script src="{{asset('/js/fxDataTable.js')}}"></script>
+        <script src="{{asset('/js/fxDataTable1.js')}}"></script>
         <script src="{{asset('/js/fxValidate.js')}}"></script>
+        <script src="{{asset('/js/fxValidate1.js')}}"></script>
 
         <script>
             $.ajaxSetup({

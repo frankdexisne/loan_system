@@ -37,6 +37,10 @@ class Client extends Model
         'full_name'
     ];
 
+    protected $cast = [
+        'dob' => 'date'
+    ];
+
     public function address(){
         return $this->hasOne(Address::class);
     }
@@ -50,7 +54,7 @@ class Client extends Model
     }
 
     public function co_maker(){
-        return $this->hasOne(CoMaker::class);
+        return $this->belongsToMany(CoMaker::class,'client_co_makers');
     }
 
     public function getPersonalSavingAttribute(){

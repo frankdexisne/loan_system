@@ -21,8 +21,12 @@ class Expense extends Model
         'payment_mode_id'
     ];
 
+    protected $cast = [
+        'expense_date' => 'date'
+    ];
+
     public function employee(){
-        return $this->belongsTo(App\Models\DBPayroll\Employee::class);
+        return $this->belongsTo(\App\Models\DBPayroll\Employee::class);
     }
     public function expense_type(){
         return $this->belongsTo(ExpenseType::class);

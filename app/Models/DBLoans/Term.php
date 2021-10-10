@@ -16,10 +16,15 @@ class Term extends Model
     ];
 
     protected $appends = [
-        'name'
+        'name',
+        'payment_mode_id'
     ];
 
     public function getNameAttribute(){
         return $this->no_of_months.($this->daily_only==1 ? ' days' : ' months');
+    }
+
+    public function getPaymentModeIdAttribute(){
+        return $this->daily_only==1 ? 1 : 2;
     }
 }

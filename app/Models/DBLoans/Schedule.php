@@ -21,6 +21,10 @@ class Schedule extends Model
         'schedule_date_formatted'
     ];
 
+    protected $cast = [
+        'schedule_date' => 'date'
+    ];
+
     public function getScheduleDateFormattedAttribute(){
         return date('m/d/Y',strtotime($this->schedule_date));
     }

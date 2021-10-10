@@ -31,6 +31,11 @@ class Payment extends Model
         'ins_amount'
     ];
 
+    protected $cast = [
+        'payment_date' => 'date',
+        'amount' => 'double'
+    ];
+
     public function loan(){
         return $this->belongsTo(Loan::class);
     }
@@ -60,11 +65,11 @@ class Payment extends Model
     }
 
     public function getPsAmountAttribute(){
-        return $this->ps_id!=null ? number_format($this->ps->amount,2,'.',',') : 0;
+        return $this->ps_id!=null ? $this->ps->amount : 0;
     }
 
     public function getCbuAmountAttribute(){
-        return $this->cbu_id!=null ? number_format($this->cbu->amount,2,'.',',') : 0;
+        return $this->cbu_id!=null ? $this->cbu->amount : 0;
     }
 
     public function getInsAmountAttribute(){

@@ -4,7 +4,8 @@ function formValidate(
     _appends = [],
     _baseURL,
     _module,
-    _callback
+    _callback,
+    _subURI = ''
 ){
     return $($el).validate({
         rules: _rules,
@@ -40,7 +41,7 @@ function formValidate(
             }
 
             $.ajax({
-                url: $('#id').attr('value') ? _baseURL+"/"+_module+"/"+$('#id').val() : _baseURL+"/"+_module,
+                url: $('#id').attr('value') ? _baseURL+"/"+_module+"/"+$('#id').val() : _baseURL+"/"+_module+(_subURI !=='' ? '/'+_subURI : ''),
                 type: $('#id').attr('value') ? "PUT" : "POST",
                 data: $($el).serialize(),
                 processData: false,

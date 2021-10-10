@@ -75,6 +75,11 @@ class BaseCrudController extends Controller
         return view($this->module . '.index');
     }
 
+    protected function create()
+    {
+        return view($this->module . '.create');
+    }
+
     protected function jsonData()
     {
         $this->filterJsonData();
@@ -85,6 +90,10 @@ class BaseCrudController extends Controller
     }
 
     protected function filterJsonData(){
+        return;
+    }
+
+    protected function onBeforeStore($data){
         return;
     }
     /**
@@ -98,8 +107,15 @@ class BaseCrudController extends Controller
         $raw_data = request()->validate($this->rules);
         if($raw_data){
             $data = array_merge(request()->all(), $this->appendOnStore(request()));
-            return $this->model->create($data);
+            $this->onBeforeStore($data);
+            $model = $this->model->create($data);
+            $this->onAfterStore($model);
+            return $model;
         }
+    }
+
+    protected function onAfterStore($model){
+        return;
     }
 
     /**
@@ -126,6 +142,9 @@ class BaseCrudController extends Controller
 
     }
 
+    protected function onBeforeUpdate($data, $model){
+        return;
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -138,10 +157,23 @@ class BaseCrudController extends Controller
         $record = $this->model->findOrFail($id);
         if($record && $raw_data = request()->validate($this->rules))
         {
-            $record->update($raw_data);
+            $this->onBeforeUpdate($raw_data, $record);
+            $data = array_merge(request()->all(), $this->appendOnUpdate(request()));
+            $record->update($data);
             $record->refresh();
+            $this->onAfterUpdate($record);
             return $record;
         }
+    }
+
+
+    protected function onAfterUpdate($model){
+        return;
+    }
+
+    protected function appendOnUpdate($request)
+    {
+        return [];
     }
 
     /**

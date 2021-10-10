@@ -11,8 +11,18 @@ class Withdraw extends Model
 
     protected $connection = 'mysql';
 
-    protected $fillable = ['client_id','transaction_id','reference_no','withdraw_date','amount'];
+    protected $fillable = [
+        'client_id',
+        'transaction_id',
+        'reference_no',
+        'withdraw_date',
+        'amount'
+    ];
 
+    protected $cast = [
+        'withdraw_date' => 'date'
+    ];
+    
     protected $appends = ['withdraw_date_formatted'];
 
     public function getWithdrawDateFormattedAttribute(){
